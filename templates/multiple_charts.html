@@ -1,0 +1,135 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker Charts</title>
+    <style>
+        *{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    
+    margin: 0;
+    padding: 0;
+    /* display: flex;  */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-attachment: fixed;
+    
+}
+
+
+        .expense-category{
+            /* display : flex; */
+            width : 50vw;
+            justify-content: center;
+            margin : 20px auto;
+            /* border: 1px solid gray; */
+            border-radius: 10px;
+            margin : 2px;
+            
+        }
+        center {
+            text-decoration: underline;
+        }
+        .chart-img{
+            width : 600px;
+            height: 500px;
+        }
+        table{
+            border : 1px solid black;
+            padding: 5px ;
+            font-size: x-large;
+            border-radius: 8px;
+             
+        }
+        td{
+            padding: 5px 20px;
+        }
+        .allcharts{
+            display:flex;
+        }
+        .expense-category-income{
+            border-left: 1px solid gray;
+        }
+        .expense-category-breakdown{
+            border-right:1px solid gray;
+        }
+        
+    </style>
+    <link rel="stylesheet" href="{% static 'css/navigation.css' %}">
+    
+</head>
+<body>
+    {% include 'navigationbar.html'%}
+    {%if  msg%}
+    <h2>chart not available</h2>
+    {%else %}
+    <h1>Expense Tracker Charts</h1>
+
+    <!-- Date Range Filter Form -->
+    <form method="get" action="">
+        <label for="start_date">Start Date:</label>
+        <input type="date" id="start_date" name="start_date" value="{{ start_date }}">
+        
+        <label for="end_date">End Date:</label>
+        <input type="date" id="end_date" name="end_date" value="{{ end_date }}">
+        
+        <button type="submit">Filter</button>
+    </form>
+
+    <hr>
+    <div class="allcharts">
+        
+        <div class="expense-category expense-category-breakdown">
+            <div>
+
+                <center><h2>Expense Category Breakdown</h2></center>
+                <img src="data:image/png;base64,{{ chart2 }}" alt="Expense Category Breakdown" class="chart-img">
+            </div>
+            <div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    {% for item in expense_totals %}
+                    <td>{{ item.category}}</td>
+                    {% endfor %}
+                    <td>Total</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>Total Amount</th>
+                    {% for item in expense_totals %}
+                    <td>{{ item.total}}</td>
+                    {% endfor %}
+                    <td >{{total_sum_exp}}</td>
+                </tr>
+                
+                
+               
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<div class="expense-category expense-category-income">
+    <div>
+        <center><h2>Monthly Expenses vs Incomes</h2></center>
+        <img src="data:image/png;base64,{{ chart1 }}" alt="Monthly Expenses vs Incomes" class="chart-img">
+    </div>
+</div>
+</div>
+{%endif%}  
+</body>
+</html>

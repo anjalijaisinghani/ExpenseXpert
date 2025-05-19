@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExpenseXpert</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navigation.css' %}">
+</head>
+<body>
+    
+        {% include 'navigationbar.html'%}
+        <div class="container">
+            
+            <h1><i class="fas fa-wallet"></i>Income</h1>
+            <form id="expense-form" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="text" id="expense-name" name="income_source" placeholder="Income Source" required />
+                <i class="fas fa-edit icon"></i>
+            </div>
+            
+            <div class="form-group">
+                <input type="number" id="expense-amount" name="income_amount" placeholder="Income Amount" required />
+                <i class="fas fa-dollar-sign icon"></i>
+            </div>
+        
+                <div class="form-group">
+                    <input type="date" id="expense-date" name="income_date" required />
+                    <i class="fas fa-calendar-alt icon"></i>
+                </div>
+                
+            
+            <button type="submit"><i class="fas fa-plus-circle"></i> Add Income</button>
+        </form>
+        <div class="expense-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sr. No.</th>
+                        <th>Source</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                    
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if income %}
+                        {% for inc in income %}
+                            <tr></tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ inc.income_source }}</td>
+                                <td>{{ inc.income_amount }}</td>
+                                <td>{{ inc.income_date }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="5" class="text-center">No income found.</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+                <tbody id="expense-list"></tbody>
+            </table>
+
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

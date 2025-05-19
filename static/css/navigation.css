@@ -1,0 +1,45 @@
+nav{
+    width: 100vw;
+    background: rgba(0,0,0,0.3);
+    padding: 20px;
+    display : flex;
+    justify-content: space-between;
+
+}
+
+ul{
+    display:flex;
+    flex-direction: row-reverse;
+    margin-right: 30px;
+    
+
+}
+li{
+    list-style-type: none;
+    padding-left: 10px;
+    padding-right: 10px; 
+}
+a{
+    color:white;
+    text-decoration: none;
+    padding: 10px;
+    font-size: 20px;
+}
+#Expensexpert{
+    position: Absolute;
+    font-size: 40px;
+    color: oldlace;
+    margin: 0;
+    padding:0;
+    font-weight: bolder;
+    font-style: italic;
+    cursor : pointer;
+    text-shadow: 5px 3px 5px black;
+    top:5px;
+}
+#ExpenseTrack{
+    color:white;
+    font-style:normal;
+    font-size: 20px;
+    text-shadow : 0 0 0 ;
+}
